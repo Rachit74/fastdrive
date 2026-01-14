@@ -41,26 +41,55 @@ exports.userSignup = async (req, res) => {
 
 
 exports.userLogin = async (req,res) => {
-    // validate data
-    const { email, password } = req.body;
+    try {
+         // validate data
+        const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({
-            message: "Please Provide Email!",
-        });
-    }
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Please Provide Email!",
+            });
+        }
 
-    // find user
-    const user = await db.users.findUserByEmail(email);
+        // find user
+        const user = await db.users.findUserByEmail(email);
 
-    // compare password
-    const isMatch = await bcrypt.compare(password, user.password_hash);
+        if (!user) {
+            return res.status(401).json({
+                message: "Invalid Email!",
+            })
+        }
 
-    if (!isMatch) {
-        return res.status(401).json({
-            message: "Invalid Password!"
+        // compare password
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+
+        if (!isMatch) {
+            return res.status(401).json({
+                message: "Invalid Password!",
+            })
+        }
+
+        const token = jwt.sign(
+            {
+                userID: user.id,
+                email: user.email,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: process.env.JWT_EXPIRES || '1d',
+            }
+        );
+
+        return res.status(200).json({
+            message: "Login Successful!",
+            token,
         })
-    }
+            
+    } catch (error) {
+        console.error("Login Error: ", error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+        });
 
-    return res.send(user);
+    }
 }
