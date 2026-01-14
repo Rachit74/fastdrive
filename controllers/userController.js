@@ -1,5 +1,6 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.userSignup = async (req, res) => {
     try {
@@ -9,13 +10,13 @@ exports.userSignup = async (req, res) => {
         // Basic Validation
         if (!username || !email || !password || !confirm_password) {
             return res.status(400).json({
-                message: "All fields are required!"
+                message: "All fields are required!",
             })
         }
 
         if (password != confirm_password) {
             return res.status(400).json({
-                message: "Passwords not not match!"
+                message: "Passwords not not match!",
             })
         }
 
@@ -25,15 +26,41 @@ exports.userSignup = async (req, res) => {
         const user = await db.users.createUser(username, email, password_hash);
 
         return res.status(200).json({
-            message: "User Registered!"
-        })
+            message: "User Registered!",
+        });
         
     } catch (error) {
         console.error("Signup Error: ", error);
-        res.status(500).json({
-            message: "Internal Server Error"
+        return res.status(500).json({
+            message: "Internal Server Error",
         })
     }
     
 
+}
+
+
+exports.userLogin = async (req,res) => {
+    // validate data
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({
+            message: "Please Provide Email!",
+        });
+    }
+
+    // find user
+    const user = await db.users.findUserByEmail(email);
+
+    // compare password
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+
+    if (!isMatch) {
+        return res.status(401).json({
+            message: "Invalid Password!"
+        })
+    }
+
+    return res.send(user);
 }
