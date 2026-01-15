@@ -20,3 +20,26 @@ exports.uploadFile = async (req, res) => {
         filename: req.file.filename
     });
 }
+
+exports.getFiles = async (req, res) => {
+
+    const user_id = req.user.userID;
+    let { folder_id } = req.params;
+
+    console.log(user_id);
+
+    if (folder_id == undefined) {
+        folder_id = null;
+    }
+
+    console.log(folder_id);
+
+    const files = await db.files.getFiles(user_id, folder_id);
+
+    
+    return res.status(200).json({
+        message: "File Found!",
+        files,
+    })
+
+}

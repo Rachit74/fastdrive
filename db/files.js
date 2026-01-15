@@ -14,10 +14,22 @@ async function uploadFile(file_name, original_name, mime_type, file_size, storag
     return rows[0];
 }
 
-// async function getFiles(params) {
-    
-// }
+async function getFiles(user_id, folder_id) {
+    const { rows } = await pool.query(
+        `
+        SELECT * FROM files
+        WHERE user_id = $1
+        AND (
+            (folder_id = $2) OR ($2 IS NULL AND folder_id IS NULL)
+        ); 
+        `,
+        [user_id, folder_id]
+    )
+
+    return rows;
+}
 
 module.exports = {
     uploadFile,
+    getFiles
 }

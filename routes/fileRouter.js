@@ -10,5 +10,6 @@ const upload = multer({ dest: 'uploads/' });
 const fileRouter = Router();
 
 fileRouter.post("/upload", auth, upload.single('file'), fileController.uploadFile);
+fileRouter.get("/files", auth, fileController.getFiles);
 
 module.exports = fileRouter;
