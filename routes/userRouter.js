@@ -5,6 +5,10 @@ const auth = require("../middleware/authMiddleware");
 
 const userRouter = Router();
 
+// form routes
+userRouter.get('/signup', userController.userSignupForm);
+userRouter.get('/login', userController.userLoginForm);
+
 userRouter.post('/signup', userController.userSignup);
 userRouter.post('/login', userController.userLogin);
 userRouter.get('/profile', auth, (req, res) => {

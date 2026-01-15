@@ -2,6 +2,14 @@ const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+exports.userSignupForm = async (req, res) => {
+    res.render("signup");
+}
+
+exports.userLoginForm = async (req,res) => {
+    res.render("login");
+}
+
 exports.userSignup = async (req, res) => {
     try {
 
@@ -33,6 +41,7 @@ exports.userSignup = async (req, res) => {
         console.error("Signup Error: ", error);
         return res.status(500).json({
             message: "Internal Server Error",
+            error_ : error.detail
         })
     }
     
