@@ -2,6 +2,7 @@ const express = require("express");
 
 const userRouter = require("./routes/userRouter");
 const fileRouter = require("./routes/fileRouter");
+const folderRouter = require("./routes/folderRouter");
 
 require("dotenv").config();
 const app = express();
@@ -10,7 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/auth', userRouter);
-app.use('/files', fileRouter);
+app.use('/file', fileRouter);
+app.use("/folder", folderRouter);
 
 
 const PORT = 8000;
