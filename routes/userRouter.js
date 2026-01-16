@@ -9,15 +9,13 @@ const userRouter = Router();
 userRouter.get('/signup', userController.userSignupForm);
 userRouter.get('/login', userController.userLoginForm);
 
+// action routes
 userRouter.post('/signup', userController.userSignup);
 userRouter.post('/login', userController.userLogin);
-userRouter.get('/profile', auth, (req, res) => {
-    console.log("PROFILE ROUTE HIT");
-    return res.json({
-        message: "Protected Route",
-        user: req.user,
-    });
-});
+userRouter.put('/update', auth, userController.updateProfile);
+
+
+userRouter.get('/profile', auth, userController.userProfile);
 
 
 module.exports = userRouter;

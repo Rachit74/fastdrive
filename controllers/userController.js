@@ -82,6 +82,7 @@ exports.userLogin = async (req,res) => {
             {
                 userID: user.id,
                 email: user.email,
+                username: user.username,
             },
             process.env.JWT_SECRET,
             {
@@ -96,7 +97,7 @@ exports.userLogin = async (req,res) => {
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
-        console.log(req.cookies);
+        // console.log(req.cookies);
 
         res.setHeader("HX-Redirect", "/auth/profile"); 
         return res.status(200).send("Redirecting...");
@@ -113,4 +114,53 @@ exports.userLogin = async (req,res) => {
         });
 
     }
+}
+
+exports.updateProfile = async (req, res) => {
+    try {
+
+        const { username, email, new_password, old_password } = req.body;
+
+        const user_id = req.user.userID;
+        console.log(user_id);
+        const user = await db.users.getUserByID(user_id);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User Not Found!"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(old_password, user.password_hash);
+
+        if (!isMatch) {
+                return res.status(401).json({
+                    message: "Invalid Password!",
+                })
+        }
+
+
+
+        // hash new password
+        const new_password_hash = await bcrypt.hash(new_password, 10);
+
+        const updated_user = await db.users.updateUser(username, email, new_password_hash, user_id);
+
+
+        return res.status(200).json({
+            message: "User Details Updated!",
+            updated_user,
+        })
+
+        
+    } catch (error) {
+        console.error("Update Error: ", error);
+        return res.status(500).json({
+            error,
+        })
+    }
+}
+
+exports.userProfile = async (req, res) => {
+    return res.render("profile")
 }

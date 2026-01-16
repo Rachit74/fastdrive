@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 module.exports = function authenticate(req, res, next) {
     // console.log("AUTH HEADER:", req.headers.authorization);
 
-    const authHeader = req.cookies.token || req.headers.authorization;
+    // const authHeader = req.cookies.token || req.headers.authorization;
     const token = req.cookies.token
 
     if (!token || token == undefined) {
@@ -13,7 +13,7 @@ module.exports = function authenticate(req, res, next) {
     }
 
     // const token = authHeader.split(" ")[1];
-    console.log("TOKEN:", token);
+    // console.log("TOKEN:", token);
 
     if (!token) {
         return res.status(401).json({
