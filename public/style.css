@@ -1,16 +1,89 @@
-/* General Page Setup */
+/* --- 1. Global Reset & Typography --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     background-color: #f6f8fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     color: #1f2328;
+    line-height: 1.5;
 }
 
-/* The Main Container */
+/* --- 2. Navbar Styling --- */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #d0d7de;
+    padding: 12px 0;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1012px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2328;
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #1f2328;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar-links a:hover {
+    color: #0969da;
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 10px;
+    padding-left: 15px;
+    border-left: 1px solid #d0d7de;
+}
+
+.btn-signup {
+    border: 1px solid #d0d7de;
+    padding: 5px 12px;
+    border-radius: 6px;
+    background-color: #f6f8fa;
+}
+
+/* --- 3. Layout Containers --- */
+.container {
+    max-width: 1012px;
+    margin: 32px auto;
+    padding: 0 16px;
+}
+
+/* Add this class to your <body> tag ONLY on Login/Signup pages */
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 70px); /* Centers form below navbar */
+}
+
+/* --- 4. Form & Card Styling --- */
 .signup-container {
     background-color: #ffffff;
     border: 1px solid #d0d7de;
@@ -18,6 +91,7 @@ body {
     padding: 32px;
     width: 100%;
     max-width: 440px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -28,22 +102,19 @@ h1 {
     text-align: center;
 }
 
-/* Form Groups for spacing */
 .form-group {
     margin-bottom: 16px;
     display: flex;
     flex-direction: column;
 }
 
-/* Label Styling */
 label {
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 6px;
 }
 
-/* Input Styling */
-input {
+input, select {
     padding: 8px 12px;
     font-size: 14px;
     border: 1px solid #d0d7de;
@@ -59,16 +130,13 @@ input:focus {
     background-color: #ffffff;
 }
 
-/* Helper Text (The small grey notes) */
 .helper-text {
     font-size: 12px;
     color: #636c76;
     margin-top: 4px;
-    margin-bottom: 0;
-    line-height: 1.4;
 }
 
-/* The "Create Account" Button */
+/* --- 5. Buttons & Links --- */
 button {
     width: 100%;
     background-color: #1f2328;
@@ -79,47 +147,31 @@ button {
     border: 1px solid rgba(27, 31, 36, 0.15);
     border-radius: 6px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 button:hover {
     background-color: #2b3137;
 }
 
-/* New helper for the Password label row */
 .label-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
 }
 
-.label-wrapper label {
-    margin-bottom: 0; /* Override default margin */
-}
-
-/* Link Styling */
 .forgot-link, .login-footer a {
     font-size: 12px;
     color: #0969da;
     text-decoration: none;
 }
 
-.forgot-link:hover, .login-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Footer styling below the form */
 .login-footer {
     margin-top: 24px;
     padding: 15px;
     border: 1px solid #d0d7de;
     border-radius: 6px;
     text-align: center;
-    font-size: 14px;
-}
-
-/* Ensure the button looks the same */
-.login-btn {
-    margin-top: 8px;
+    background: white;
+    max-width: 440px;
+    width: 100%;
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FastDrive</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-brand">FastDrive</a>
+            
+            <nav class="navbar-links">
+                <a href="/files">My Files</a>
+                <a href="/folders">My Folders</a>
+
+                <div class="auth-section">
+                    <% if (user) { %>
+                        <a href="/user/profile" class="user-link">@<%= user.username %></a>
+                        <a href="/auth/logout" class="btn-outline">Logout</a>
+                    <% } else { %>
+                        <a href="/auth/login">Login</a>
+                        <a href="/auth/signup" class="btn-signup">Sign up</a>
+                    <% } %>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <%- body %>
+    </main>
+
+</body>
+</html>

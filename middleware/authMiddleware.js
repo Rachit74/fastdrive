@@ -24,6 +24,7 @@ module.exports = function authenticate(req, res, next) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // console.log("DECODED:", decoded);
         req.user = decoded;
+        res.locals.user = decoded
         next();
     } catch (error) {
         console.error("JWT ERROR:", error.message);
