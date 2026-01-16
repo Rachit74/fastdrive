@@ -2,6 +2,8 @@ const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
+// template render controllers
 exports.userSignupForm = async (req, res) => {
     res.render("signup");
 }
@@ -9,6 +11,11 @@ exports.userSignupForm = async (req, res) => {
 exports.userLoginForm = async (req,res) => {
     res.render("login");
 }
+
+exports.updateProfileForm = (req, res) => {
+    return res.render("update");
+}
+
 
 exports.userSignup = async (req, res) => {
     try {
@@ -120,10 +127,13 @@ exports.updateProfile = async (req, res) => {
     try {
 
         const { username, email, new_password, old_password } = req.body;
+        // console.log(req.body);
 
         const user_id = req.user.userID;
-        console.log(user_id);
+        // console.log(user_id);
+
         const user = await db.users.getUserByID(user_id);
+        // console.log(user);
 
         if (!user) {
             return res.status(404).json({
@@ -134,9 +144,13 @@ exports.updateProfile = async (req, res) => {
         const isMatch = await bcrypt.compare(old_password, user.password_hash);
 
         if (!isMatch) {
-                return res.status(401).json({
-                    message: "Invalid Password!",
-                })
+            // using status code 200 becuase htmx does not swap the html for error codes like 401, 404 and 500
+            return res.status(200).send('<p style="color: red; margin-bottom: 10px;">Invalid Password!</p>');
+
+            // return res.status(401).send("Invalid Password");
+                // return res.status(401).json({
+                //     message: "Invalid Password!",
+                // })
         }
 
 
@@ -146,7 +160,7 @@ exports.updateProfile = async (req, res) => {
 
         const updated_user = await db.users.updateUser(username, email, new_password_hash, user_id);
 
-
+        res.setHeader("HX-Redirect", "/auth/profile");
         return res.status(200).json({
             message: "User Details Updated!",
             updated_user,

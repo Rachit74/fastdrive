@@ -8,6 +8,7 @@ const userRouter = Router();
 // form routes
 userRouter.get('/signup', userController.userSignupForm);
 userRouter.get('/login', userController.userLoginForm);
+userRouter.get('/update', auth, userController.updateProfileForm);
 
 // action routes
 userRouter.post('/signup', userController.userSignup);
