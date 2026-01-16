@@ -89,10 +89,22 @@ exports.userLogin = async (req,res) => {
             }
         );
 
-        return res.status(200).json({
-            message: "Login Successful!",
-            token,
-        })
+        // send cookie to brower to store jtw
+        res.cookie("token", token, {
+            httpOnly: true, // Prevents XSS attacks
+            secure: process.env.NODE_ENV === "production", 
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
+        console.log(req.cookies);
+
+        res.setHeader("HX-Redirect", "/auth/profile"); 
+        return res.status(200).send("Redirecting...");
+
+        // return res.status(200).json({
+        //     message: "Login Successful!",
+        //     token,
+        // })
             
     } catch (error) {
         console.error("Login Error: ", error);

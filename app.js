@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("node:path");
 const expressLayouts = require("express-ejs-layouts");
+const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/userRouter");
 const fileRouter = require("./routes/fileRouter");
@@ -17,6 +18,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(assetsPath));
