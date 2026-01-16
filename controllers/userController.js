@@ -88,7 +88,6 @@ exports.userLogin = async (req,res) => {
         const token = jwt.sign(
             {
                 userID: user.id,
-                email: user.email,
                 username: user.username,
             },
             process.env.JWT_SECRET,
@@ -128,6 +127,10 @@ exports.updateProfile = async (req, res) => {
 
         const { username, email, new_password, old_password } = req.body;
         // console.log(req.body);
+
+        if (!username || !email || !new_password || !old_password) {
+            res.send('<p style="color: red; margin-bottom: 10px;">All Fields are required!</p>');
+        }
 
         const user_id = req.user.userID;
         // console.log(user_id);
@@ -175,6 +178,13 @@ exports.updateProfile = async (req, res) => {
     }
 }
 
+exports.userLogout = async (req,res) => {
+    res.clearCookie('token');
+
+    return res.redirect('/auth/login');
+}
+
 exports.userProfile = async (req, res) => {
-    return res.render("profile")
+    const user = await db.users.getUserByID(req.user.userID);
+    return res.render("profile", { user })
 }

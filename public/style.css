@@ -175,3 +175,63 @@ button:hover {
     max-width: 440px;
     width: 100%;
 }
+
+/* Profile Specific Styles */
+.profile-card {
+    text-align: center;
+}
+
+.profile-header {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #d0d7de;
+}
+
+
+.profile-email {
+    color: #636c76;
+    margin: 4px 0 0;
+}
+
+/* Action Buttons */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-actions a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.2s;
+}
+
+/* Yellowish Edit Button */
+.btn-edit {
+    background-color: #fff8c4;
+    color: #735c0f;
+    border: 1px solid rgba(212, 167, 44, 0.4);
+}
+
+.btn-edit:hover {
+    background-color: #fbe54e;
+    border-color: rgba(212, 167, 44, 0.8);
+}
+
+/* Red Delete Button */
+.btn-delete {
+    background-color: #f6f8fa;
+    color: #cf222e;
+    border: 1px solid #d0d7de;
+}
+
+.btn-delete:hover {
+    background-color: #cf222e;
+    color: #ffffff;
+    border-color: #cf222e;
+}

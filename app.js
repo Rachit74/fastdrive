@@ -35,6 +35,10 @@ app.use('/auth', userRouter);
 app.use('/file', fileRouter);
 app.use("/folder", folderRouter);
 
+app.get('/', (req, res) => {
+    res.render("index");
+})
+
 
 const PORT = 8000;
 

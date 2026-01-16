@@ -18,5 +18,7 @@ userRouter.put('/update', auth, userController.updateProfile);
 
 userRouter.get('/profile', auth, userController.userProfile);
 
+userRouter.get('/logout', auth, userController.userLogout);
+
 
 module.exports = userRouter;

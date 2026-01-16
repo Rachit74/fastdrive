@@ -1,7 +1,13 @@
-<div class="profile-container">
-    <%= user.userID %> <br>
-    <%= user.email %> <br>
-    <%= user.username %>
-    <a href="/auth/update">Edit profile</a>
-    <a href="/auth/delete">Delete Profile</a>
+<div class="auth-page">
+    <div class="signup-container profile-card">
+        <div class="profile-header">
+            <h2><%= user.username %></h2>
+            <p class="profile-email"><%= user.email %></p>
+        </div>
+
+        <div class="profile-actions">
+            <a href="/auth/update" class="btn-edit">Edit profile</a>
+            <a href="/auth/delete" class="btn-delete">Delete profile</a>
+        </div>
+    </div>
 </div>
