@@ -29,7 +29,19 @@ async function getFiles(user_id, folder_id) {
     return rows;
 }
 
+async function getFileByID(file_id) {
+    const { rows } = await pool.query(
+        `
+        SELECT * FROM files
+        WHERE id = $1;
+        `,
+        [file_id]
+    );
+    return rows[0];
+}
+
 module.exports = {
     uploadFile,
-    getFiles
+    getFiles,
+    getFileByID,
 }

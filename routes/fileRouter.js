@@ -9,9 +9,21 @@ const upload = multer({ dest: 'uploads/' });
 
 const fileRouter = Router();
 
+// 
+
+// ejs render routes (get routes)
 fileRouter.get("/upload", auth, fileController.uploadFileForm);
 
-fileRouter.post("/upload", auth, upload.single('file'), fileController.uploadFile);
+// action routes
 fileRouter.get("/files", auth, fileController.getFiles);
+
+fileRouter.post("/upload", auth, upload.single('file'), fileController.uploadFile);
+
+fileRouter.get("/download/:file_id", auth, fileController.downloadFile);
+
+// download route
+
+
+// 
 
 module.exports = fileRouter;
