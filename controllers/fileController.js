@@ -1,6 +1,10 @@
 const db = require("../db");
 
 
+exports.uploadFileForm = (req, res) => {
+    res.render("upload");
+}
+
 exports.uploadFile = async (req, res) => {
     console.log("UPLOAD FILE ROUTE HIT!")
 
@@ -9,6 +13,8 @@ exports.uploadFile = async (req, res) => {
             message: "No File uploaded!",
         })
     }
+
+    console.log(req.file);
 
     const { filename, originalname, mimetype, size, path } = req.file
 
@@ -26,20 +32,13 @@ exports.getFiles = async (req, res) => {
     const user_id = req.user.userID;
     let { folder_id } = req.params;
 
-    console.log(user_id);
 
     if (folder_id == undefined) {
         folder_id = null;
     }
 
-    console.log(folder_id);
-
     const files = await db.files.getFiles(user_id, folder_id);
 
-    
-    return res.status(200).json({
-        message: "File Found!",
-        files,
-    })
-
+    console.log(files);
+    return res.render("files", { files });
 }

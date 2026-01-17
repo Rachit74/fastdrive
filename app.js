@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 
 app.use('/auth', userRouter);
-app.use('/file', fileRouter);
+app.use('/', fileRouter);
 app.use("/folder", folderRouter);
 
 app.get('/', (req, res) => {

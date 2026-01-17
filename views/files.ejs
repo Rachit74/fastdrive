@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="files-header">
+        <h2>My Files</h2>
+        <span class="file-count"><%= files.length %> items</span>
+    </div>
+    
+    <div class="files-grid">
+        <% files.forEach(file => { %>
+            <div class="file-row">
+                <div class="file-info">
+                    <div class="file-icon">📄</div>
+                    <div class="file-details">
+                        <span class="file-name"><%= file.original_name %></span>
+                        <span class="file-meta">
+                            <%= file.mime_type %> • <%= (file.file_size / 1024).toFixed(2) %> KB
+                        </span>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <a href="/download/<%= file.id %>" class="btn-download">Download</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
