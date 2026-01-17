@@ -8,7 +8,6 @@ exports.uploadFileForm = (req, res) => {
 }
 
 exports.uploadFile = async (req, res) => {
-    console.log("UPLOAD FILE ROUTE HIT!")
 
     if (!req.file) {
         res.status(400).json({
@@ -16,13 +15,11 @@ exports.uploadFile = async (req, res) => {
         })
     }
 
-    console.log(req.file);
 
     const { filename, originalname, mimetype, size, path } = req.file
 
     const file_meta = await db.files.uploadFile(filename, originalname, mimetype, size, path, null, req.user.userID);
 
-    console.log(file_meta);
     return res.status(200).json({
         message: "File uploaded successfully",
         filename: req.file.filename
@@ -47,22 +44,19 @@ exports.getFiles = async (req, res) => {
 
 exports.downloadFile = async (req, res) => {
     const file_id = req.params.file_id;
-    console.log(file_id);
 
     const file = await db.files.getFileByID(file_id);
 
     // get file from db
     if (!file) {
-        return res.status(404).send("File Not Found!")
+        return res.status(404).send("404 FILE NOT FOUND!")
     }
 
     const user_id = req.user.userID;
-    console.log(user_id);
-    console.log(file.id);
     
     // check ownership
     if (user_id != file.user_id) {
-        return res.status(401).send("Access Denied");
+        return res.status(401).send("ACCESS DENIED");
     }
 
 
@@ -77,6 +71,5 @@ exports.downloadFile = async (req, res) => {
         file.storage_path,
         file.original_name
     );
-
 
 }

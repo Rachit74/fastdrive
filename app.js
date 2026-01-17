@@ -3,6 +3,7 @@ const path = require("node:path");
 const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 
+const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const fileRouter = require("./routes/fileRouter");
 const folderRouter = require("./routes/folderRouter");
@@ -31,7 +32,8 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/auth', userRouter);
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
 app.use('/', fileRouter);
 app.use("/folder", folderRouter);
 
