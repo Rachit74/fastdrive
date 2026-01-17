@@ -1,0 +1,28 @@
+<div class="modal-overlay" id="modal-container">
+    <div class="modal-card">
+        <h3>Create New Folder</h3>
+
+        <form hx-post="/folder/new" hx-target="body" hx-push-url="true">
+            <div class="form-group">
+                <label for="folder_name">Folder Name</label>
+                <input
+                    type="text"
+                    name="folder_name"
+                    id="folder_name"
+                    placeholder="e.g. Work Documents"
+                    required
+                    autofocus
+                />
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="document.getElementById('modal').innerHTML = ''">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-primary" style="background-color: #2ea44f;">
+                    Create Folder
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

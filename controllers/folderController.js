@@ -19,3 +19,13 @@ exports.createFolder = async (req, res) => {
     });
 
 }
+
+exports.getFolders = async (req, res) => {
+    const user_id = req.user.userID;
+
+    const folders = await db.folders.getFolders(user_id);
+
+    console.log(folders);
+
+    return res.render("folders", { folders });
+}

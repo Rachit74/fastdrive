@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="files-header">
+        <h2>My Folders</h2>
+        <span class="file-count">
+            <%= (folders && folders.length) ? folders.length : 0 %> folders
+        </span>
+    </div>
+
+    <button 
+        class="btn-new-folder"
+        hx-get="/folder/new" 
+        hx-target="#modal" 
+        hx-trigger="click">
+        + New Folder
+    </button>
+
+    <div id="modal"></div>
+
+    <div class="files-grid">
+        <% if (!folders || folders.length === 0) { %>
+            <div class="file-row">
+                <p class="file-meta" style="padding: 20px; text-align: center; width: 100%;">No folders yet. Create one to get started!</p>
+            </div>
+        <% } else { %>
+            <% folders.forEach(folder => { %>
+                <div class="file-row">
+                    <div class="file-info">
+                        <div class="file-icon">📁</div>
+                        <div class="file-details">
+                            <span class="file-name"><%= folder.folder_name %></span>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="/folders/<%= folder.id %>" class="btn-download">Open</a>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</div>

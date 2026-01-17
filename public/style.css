@@ -326,3 +326,95 @@ button:hover {
 .btn-download:hover {
     background: #ebeff2;
 }
+
+/* --- 6. Modal System (Solid & Fixed) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker, solid-feeling overlay without blur to prevent bleeding */
+    background: rgba(31, 35, 40, 0.75); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-card {
+    /* Forced solid white background */
+    background: #ffffff !important; 
+    width: 90%;
+    max-width: 400px;
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+    /* Deeper shadow to create physical separation */
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3); 
+    animation: modalFadeIn 0.2s ease-out;
+    position: relative;
+    opacity: 1 !important;
+}
+
+.modal-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2328;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    width: auto;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #f6f8fa;
+    color: #1f2328;
+    border: 1px solid #d0d7de;
+}
+
+.btn-cancel:hover {
+    background-color: #ebeff2;
+}
+
+/* --- 7. Utility & Layout --- */
+.btn-new-folder {
+    margin-bottom: 20px;
+    width: auto;
+    font-size: 14px;
+    padding: 6px 16px;
+    background-color: #2ea44f; /* Green for "Create" actions */
+    color: white;
+    border: 1px solid rgba(27, 31, 36, 0.15);
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-new-folder:hover {
+    background-color: #2c974b;
+}
+
+@keyframes modalFadeIn {
+    from { 
+        transform: scale(0.95); 
+        opacity: 0; 
+    }
+    to { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+}
