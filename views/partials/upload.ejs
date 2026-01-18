@@ -1,0 +1,30 @@
+<div class="modal-overlay" id="modal-container">
+    <div class="modal-card">
+        <h3>Upload to FastDrive</h3>
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select File</label>
+                <input 
+                    type="file" 
+                    id="file" 
+                    name="file" 
+                    class="file-input-styled" 
+                    required
+                />
+            </div>
+
+            <div class="modal-actions">
+                <button 
+                    type="button" 
+                    class="btn-cancel" 
+                    onclick="document.getElementById('modal').innerHTML = ''">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-primary" style="background-color: #2ea44f;">
+                    Upload File
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

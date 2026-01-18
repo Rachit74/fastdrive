@@ -3,23 +3,41 @@
         <h2>My Files</h2>
         <span class="file-count"><%= files.length %> items</span>
     </div>
+
+    <button 
+        class="btn-new-folder"
+        hx-get="/upload" 
+        hx-target="#modal" 
+        hx-trigger="click">
+        + Upload File
+    </button>
+
+    <div id="modal"></div>
     
     <div class="files-grid">
-        <% files.forEach(file => { %>
+        <% if (!files || files.length === 0) { %>
             <div class="file-row">
-                <div class="file-info">
-                    <div class="file-icon">📄</div>
-                    <div class="file-details">
-                        <span class="file-name"><%= file.original_name %></span>
-                        <span class="file-meta">
-                            <%= file.mime_type %> • <%= (file.file_size / 1024).toFixed(2) %> KB
-                        </span>
+                <p class="file-meta" style="padding: 20px; text-align: center; width: 100%;">
+                    No files found. Upload one to get started!
+                </p>
+            </div>
+        <% } else { %>
+            <% files.forEach(file => { %>
+                <div class="file-row">
+                    <div class="file-info">
+                        <div class="file-icon">📄</div>
+                        <div class="file-details">
+                            <span class="file-name"><%= file.original_name %></span>
+                            <span class="file-meta">
+                                <%= file.mime_type %> • <%= (file.file_size / 1024).toFixed(2) %> KB
+                            </span>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <a href="/download/<%= file.id %>" class="btn-download">Download</a>
                     </div>
                 </div>
-                <div class="file-actions">
-                    <a href="/download/<%= file.id %>" class="btn-download">Download</a>
-                </div>
-            </div>
-        <% }) %>
+            <% }) %>
+        <% } %>
     </div>
 </div>

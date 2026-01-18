@@ -101,7 +101,7 @@ exports.userLogin = async (req,res) => {
 
         // console.log(req.cookies);
 
-        res.setHeader("HX-Redirect", "/auth/profile"); 
+        res.setHeader("HX-Redirect", "/user/profile"); 
         return res.status(200).send("Redirecting...");
 
         // return res.status(200).json({

@@ -12,7 +12,11 @@ const fileRouter = Router();
 // 
 
 // ejs render routes (get routes)
-fileRouter.get("/upload", auth, fileController.uploadFileForm);
+// fileRouter.get("/upload", auth, fileController.uploadFileForm);
+
+fileRouter.get("/upload", auth, (req,res) => {
+    res.render("partials/upload", { layout: false });
+})
 
 // action routes
 fileRouter.get("/files", auth, fileController.getFiles);
