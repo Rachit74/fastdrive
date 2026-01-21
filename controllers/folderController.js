@@ -38,5 +38,4 @@ exports.getFolderByID = async (req, res) => {
 
     return res.render("files", { files });
 
-    // console.log(folder_id);
 }

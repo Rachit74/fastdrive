@@ -29,6 +29,19 @@
         </div>
     </header>
 
+        <% if (success.length > 0) { %>
+            <div class="flash flash-success">
+                <%= success[0] %>
+            </div>
+        <% } %>
+
+        <% if (error.length > 0) { %>
+            <div class="flash flash-error">
+                <%= error[0] %>
+            </div>
+        <% } %>
+
+
     <main class="container">
         <%- body %>
     </main>

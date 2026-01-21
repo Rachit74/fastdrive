@@ -36,9 +36,12 @@ exports.userSignup = async (req, res) => {
 
         const user = await db.user.createUser(username, email, password_hash);
 
-        return res.status(200).json({
-            message: "User Registered!",
-        });
+        // return res.status(200).json({
+        //     message: "User Registered!",
+        // });
+
+        req.flash("success", "User Registered! Please Login.");
+        return res.redirect("/auth/login");
         
     } catch (error) {
         console.error("Signup Error: ", error);
@@ -101,13 +104,13 @@ exports.userLogin = async (req,res) => {
 
         // console.log(req.cookies);
 
-        res.setHeader("HX-Redirect", "/user/profile"); 
-        return res.status(200).send("Redirecting...");
-
         // return res.status(200).json({
         //     message: "Login Successful!",
         //     token,
         // })
+
+        req.flash("success", "Login Successful!");
+        return res.redirect("/user/profile");
             
     } catch (error) {
         console.error("Login Error: ", error);
@@ -122,5 +125,6 @@ exports.userLogin = async (req,res) => {
 exports.userLogout = async (req,res) => {
     res.clearCookie('token');
 
-    return res.redirect('/auth/login');
+    req.flash("success", "Logout Successful!");
+    return res.redirect("/auth/login");
 }

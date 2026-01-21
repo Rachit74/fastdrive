@@ -10,7 +10,6 @@ exports.uploadFileForm = (req, res) => {
 
 exports.uploadFile = async (req, res) => {
 
-    console.log(folder_id);
 
     if (!req.file) {
         res.status(400).json({
@@ -23,10 +22,13 @@ exports.uploadFile = async (req, res) => {
 
     const file_meta = await db.files.uploadFile(filename, originalname, mimetype, size, path, null, req.user.userID);
 
-    return res.status(200).json({
-        message: "File uploaded successfully",
-        filename: req.file.filename
-    });
+    // return res.status(200).json({
+    //     message: "File uploaded successfully",
+    //     filename: req.file.filename
+    // });
+
+    req.flash("success", "File uploaded successfully");
+    return res.redirect("/files");
 }
 
 exports.getFiles = async (req, res) => {
