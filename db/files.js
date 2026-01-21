@@ -40,8 +40,22 @@ async function getFileByID(file_id) {
     return rows[0];
 }
 
+// get files by folder id
+async function getFilesByFolderID(folder_id, user_id) {
+    const { rows } = await pool.query(
+        `
+        SELECT * FROM files
+        WHERE folder_id = $1
+        AND user_id = $2;
+        `,
+        [folder_id, user_id]
+    );
+    return rows;
+}
+
 module.exports = {
     uploadFile,
     getFiles,
     getFileByID,
+    getFilesByFolderID
 }

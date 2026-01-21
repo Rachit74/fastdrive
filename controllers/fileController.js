@@ -1,3 +1,4 @@
+const console = require("console");
 const db = require("../db");
 const fs = require("fs");
 
@@ -8,6 +9,8 @@ exports.uploadFileForm = (req, res) => {
 }
 
 exports.uploadFile = async (req, res) => {
+
+    console.log(folder_id);
 
     if (!req.file) {
         res.status(400).json({
@@ -27,6 +30,7 @@ exports.uploadFile = async (req, res) => {
 }
 
 exports.getFiles = async (req, res) => {
+
 
     const user_id = req.user.userID;
     let { folder_id } = req.params;

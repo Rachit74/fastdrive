@@ -29,3 +29,14 @@ exports.getFolders = async (req, res) => {
 
     return res.render("folders", { folders });
 }
+
+exports.getFolderByID = async (req, res) => {
+    const user_id = req.user.userID;
+    const { folder_id } = req.params;
+
+    const files = await db.files.getFilesByFolderID(folder_id, user_id);
+
+    return res.render("files", { files });
+
+    // console.log(folder_id);
+}

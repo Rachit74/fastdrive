@@ -14,4 +14,6 @@ folderRouter.get("/new", auth, (req,res) => {
 
 folderRouter.get('/folders', auth, folderController.getFolders);
 
+folderRouter.get('/folders/:folder_id', auth, folderController.getFolderByID);
+
 module.exports = folderRouter;
