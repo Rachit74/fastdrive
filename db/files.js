@@ -53,9 +53,22 @@ async function getFilesByFolderID(folder_id, user_id) {
     return rows;
 }
 
+// delete file by id
+async function deleteFileByID(file_id) {
+    await pool.query(
+        `
+        DELETE FROM files
+        WHERE id = $1
+        RETURNING *;
+        `,
+        [file_id]
+    );
+}
+
 module.exports = {
     uploadFile,
     getFiles,
     getFileByID,
-    getFilesByFolderID
+    getFilesByFolderID,
+    deleteFileByID
 }

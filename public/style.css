@@ -456,3 +456,45 @@ button:hover {
         transform: translateY(0);
     }
 }
+
+/* --- Icon Button Styles --- */
+.file-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none; /* For the <a> tag download */
+}
+
+/* Download Hover */
+.btn-download:hover {
+    color: var(--link-blue);
+    background-color: #ffffff;
+    border-color: var(--link-blue);
+}
+
+/* Delete Hover */
+.btn-delete:hover {
+    color: #cf222e;
+    background-color: #ffebe9;
+    border-color: rgba(207, 34, 46, 0.4);
+}
+
+/* Adjusting the icons to look small and centered */
+.btn-icon svg {
+    display: block;
+}

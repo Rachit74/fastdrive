@@ -79,3 +79,31 @@ exports.downloadFile = async (req, res) => {
     );
 
 }
+
+exports.deleteFile = async (req, res) => {
+    const { file_id } = req.params;
+
+    const file = await db.files.getFileByID(file_id);
+
+    if (!file) {
+        req.flash("error", "File not found");
+        return res.redirect("/files");
+    }
+
+    const user_id = req.user.userID;
+
+    // check ownership
+    if (user_id != file.user_id) {
+        req.flash("error", "Access Denied");
+        return res.redirect("/files");
+    }
+
+    // delete from db
+    await db.files.deleteFileByID(file_id);
+
+    // delete physical file
+    fs.unlinkSync(file.storage_path);
+
+    req.flash("success", "File deleted successfully");
+    return res.redirect("/files");
+}

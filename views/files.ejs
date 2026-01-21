@@ -34,7 +34,22 @@
                         </div>
                     </div>
                     <div class="file-actions">
-                        <a href="/download/<%= file.id %>" class="btn-download">Download</a>
+                        <a href="/download/<%= file.id %>" class="btn-icon btn-download" title="Download">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+            <path d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Z"></path>
+            <path d="M2 12.75a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"></path>
+        </svg>
+    </a>
+
+                        <button 
+                            class="btn-icon btn-delete" 
+                            title="Delete"
+                            hx-delete="/delete/<%= file.id %>"
+                            hx-confirm="Are you sure you want to delete this file?"
+                            hx-target="closest .file-row"
+                            hx-swap="outerHTML">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75ZM4.496 6.675a.75.75 0 1 0-1.492.15l.66 6.623C3.844 14.519 4.73 16 5.938 16h4.124c1.208 0 2.094-1.481 2.274-2.552l.66-6.623a.75.75 0 0 0-1.492-.15l-.66 6.623a.75.75 0 0 1-1.137.552H5.938a.75.75 0 0 1-1.137-.552l-.66-6.623Z"></path></svg>
+                        </button>
                     </div>
                 </div>
             <% }) %>

@@ -23,11 +23,10 @@ fileRouter.get("/files", auth, fileController.getFiles);
 
 fileRouter.post("/upload", auth, upload.single('file'), fileController.uploadFile);
 
+// download route
 fileRouter.get("/download/:file_id", auth, fileController.downloadFile);
 
-// download route
-
-
-// 
+// delete route
+fileRouter.delete("/delete/:file_id", auth, fileController.deleteFile);
 
 module.exports = fileRouter;
