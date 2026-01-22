@@ -27,6 +27,6 @@ fileRouter.post("/upload", auth, upload.single('file'), fileController.uploadFil
 fileRouter.get("/download/:file_id", auth, fileController.downloadFile);
 
 // delete route
-fileRouter.delete("/delete/:file_id", auth, fileController.deleteFile);
+fileRouter.post("/delete/:file_id", auth, fileController.deleteFile);
 
 module.exports = fileRouter;

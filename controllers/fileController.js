@@ -98,11 +98,13 @@ exports.deleteFile = async (req, res) => {
         return res.redirect("/files");
     }
 
+    // delete physical file
+    fs.unlinkSync(file.storage_path);
+
     // delete from db
     await db.files.deleteFileByID(file_id);
 
-    // delete physical file
-    fs.unlinkSync(file.storage_path);
+
 
     req.flash("success", "File deleted successfully");
     return res.redirect("/files");
