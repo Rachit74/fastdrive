@@ -17,11 +17,13 @@ async function uploadFile(file_name, original_name, mime_type, file_size, storag
 async function getFiles(user_id, folder_id) {
     const { rows } = await pool.query(
         `
-        SELECT * FROM files
+        SELECT *
+        FROM files
         WHERE user_id = $1
         AND (
-            (folder_id = $2) OR ($2 IS NULL AND folder_id IS NULL)
-        ); 
+            $2::uuid IS NULL
+            OR folder_id = $2::uuid
+        );
         `,
         [user_id, folder_id]
     )
