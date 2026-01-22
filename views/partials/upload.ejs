@@ -14,6 +14,15 @@
                 />
             </div>
 
+            <% if (!folder_id) { %>
+                no folder id
+            <% } else { %>
+                folder id present: <%= folder_id %>
+            <% } %>
+
+            <!-- hidden input for folder id -->
+            <input type="hidden" name="folder_id" value="<%= folder_id %>">
+
             <div class="modal-actions">
                 <button 
                     type="button" 

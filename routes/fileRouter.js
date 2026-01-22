@@ -15,7 +15,11 @@ const fileRouter = Router();
 // fileRouter.get("/upload", auth, fileController.uploadFileForm);
 
 fileRouter.get("/upload", auth, (req,res) => {
-    res.render("partials/upload", { layout: false });
+    let folder_id = req.query.folder_id;
+        if (!folder_id || folder_id === "null") {
+        folder_id = null;
+    }
+    res.render("partials/upload", { layout: false, folder_id });
 })
 
 // action routes

@@ -17,10 +17,13 @@ exports.uploadFile = async (req, res) => {
         })
     }
 
+    const folder_id = req.body.folder_id || null;
+    console.log(folder_id);
+
 
     const { filename, originalname, mimetype, size, path } = req.file
 
-    const file_meta = await db.files.uploadFile(filename, originalname, mimetype, size, path, null, req.user.userID);
+    await db.files.uploadFile(filename, originalname, mimetype, size, path, folder_id, req.user.userID);
 
     // return res.status(200).json({
     //     message: "File uploaded successfully",
@@ -44,8 +47,10 @@ exports.getFiles = async (req, res) => {
 
     const files = await db.files.getFiles(user_id, folder_id);
 
+    folder_id = null;
+
     // console.log(files);
-    return res.render("files", { files });
+    return res.render("files", { files, folder_id });
 }
 
 exports.downloadFile = async (req, res) => {
@@ -103,8 +108,6 @@ exports.deleteFile = async (req, res) => {
 
     // delete from db
     await db.files.deleteFileByID(file_id);
-
-
 
     req.flash("success", "File deleted successfully");
     return res.redirect("/files");

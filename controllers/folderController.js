@@ -25,7 +25,7 @@ exports.getFolders = async (req, res) => {
 
     const folders = await db.folders.getFolders(user_id);
 
-    console.log(folders);
+    // console.log(folders);
 
     return res.render("folders", { folders });
 }
@@ -36,6 +36,6 @@ exports.getFolderByID = async (req, res) => {
 
     const files = await db.files.getFilesByFolderID(folder_id, user_id);
 
-    return res.render("files", { files });
+    return res.render("files", { files , folder_id });
 
 }
