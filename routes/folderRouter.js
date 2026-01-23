@@ -13,11 +13,12 @@ folderRouter.get("/new", auth, (req,res) => {
     if (!folder_id || folder_id === null) {
         folder_id = null;
     }
+
     res.render("new-folder", { folder_id });
 })
 
 folderRouter.get('/folders', auth, folderController.getFolders);
 
-folderRouter.get('/folders/:folder_id', auth, folderController.getFolderByID);
+folderRouter.get('/folders/:folder_id', auth, folderController.getFolders);
 
 module.exports = folderRouter;

@@ -6,9 +6,7 @@
         </span>
     </div>
 
-    <a href="/folder/new">
-        <button class="btn-new-folder">+ New Folder</button>
-    </a>
+    <a href="<%= folder ? `/folder/new?folder_id=${folder.id}` : '/folder/new' %>" class="btn-primary btn-new-folder">+ New Folder</a>
 
 
     <div class="files-grid">

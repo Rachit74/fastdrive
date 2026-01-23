@@ -13,17 +13,36 @@ async function createFolder(folder_name, user_id, parent_id) {
     return rows[0];
 }
 
-// get all folders
-async function getFolders(user_id) {
+// get all folders under a user and subfolder
+// for root folders the parent id would be null
+// subfolders would have some parent id
+async function getFolders(user_id, parent_id) {
+    if (parent_id === null) {
+        const { rows } = await pool.query(
+            `
+            SELECT *
+            FROM folders
+            WHERE user_id = $1
+              AND parent_id IS NULL;
+            `,
+            [user_id]
+        );
+        return rows;
+    }
+
     const { rows } = await pool.query(
         `
-        SELECT * FROM folders
-        WHERE user_id = $1;
+        SELECT *
+        FROM folders
+        WHERE user_id = $1
+          AND parent_id = $2;
         `,
-        [user_id]
+        [user_id, parent_id]
     );
+
     return rows;
 }
+
 
 // get folder by id
 async function getFolderByID(folder_id) {

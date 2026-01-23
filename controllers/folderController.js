@@ -3,10 +3,15 @@ const db = require("../db");
 
 exports.createFolder = async (req, res) => {
     const user_id = req.user.userID;
-    const { folder_name, folder_id } = req.body;
+    let { folder_name, folder_id } = req.body;
 
 
-    const parent_id = folder_id;
+    let parent_id = folder_id;
+
+    if (!parent_id) {
+        parent_id = null;
+    }
+
 
     if (!folder_name) {
         return res.status(400).json({
@@ -24,11 +29,22 @@ exports.createFolder = async (req, res) => {
 exports.getFolders = async (req, res) => {
     const user_id = req.user.userID;
 
-    const folders = await db.folders.getFolders(user_id);
+    let parent_id = req.params.folder_id;
+
+    if (!parent_id) {
+        parent_id = null;
+    }
+
+
+    // null folder for folder creation in root
+    let folder = null;
+
+    const folders = await db.folders.getFolders(user_id, parent_id);
+
 
     // console.log(folders);
 
-    return res.render("folders", { folders });
+    return res.render("folders", { folders, folder });
 }
 
 // individual folder controller
