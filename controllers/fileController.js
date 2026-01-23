@@ -4,12 +4,22 @@ const fs = require("fs");
 
 
 
-exports.uploadFileForm = (req, res) => {
-    res.render("upload");
-}
+exports.uploadFileForm = async (req, res) => {
+    const folder_id = req.query.folder_id || null;
+
+    let folder = null;
+    if (folder_id) {
+        folder = await db.folders.getFolderByID(folder_id);
+    }
+
+    res.render("upload-file", {
+        folder,
+        folder_id
+    });
+};
+
 
 exports.uploadFile = async (req, res) => {
-
 
     if (!req.file) {
         res.status(400).json({
@@ -18,8 +28,6 @@ exports.uploadFile = async (req, res) => {
     }
 
     const folder_id = req.body.folder_id || null;
-    console.log(folder_id);
-
 
     const { filename, originalname, mimetype, size, path } = req.file
 

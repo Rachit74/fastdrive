@@ -1,16 +1,30 @@
-/* --- 1. Global Reset & Typography --- */
+/* --- 1. Global Reset & Variables --- */
+:root {
+    --bg-main: #f6f8fa;
+    --bg-white: #ffffff;
+    --border-color: #d0d7de;
+    --text-primary: #1f2328;
+    --text-secondary: #636c76;
+    --link-blue: #0969da;
+    --btn-dark: #1f2328;
+    --btn-dark-hover: #2b3137;
+    --success-green: #2ea44f;
+    --success-hover: #2c974b;
+    --error-red: #cf222e;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background-color: #f6f8fa;
+    background-color: var(--bg-main);
     margin: 0;
-    color: #1f2328;
+    color: var(--text-primary);
     line-height: 1.5;
 }
 
 /* --- 2. Navbar Styling --- */
 .navbar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #d0d7de;
+    background-color: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
     padding: 12px 0;
     width: 100%;
     position: sticky;
@@ -30,7 +44,7 @@ body {
 .navbar-brand {
     font-size: 20px;
     font-weight: 600;
-    color: #1f2328;
+    color: var(--text-primary);
     text-decoration: none;
 }
 
@@ -42,13 +56,13 @@ body {
 
 .navbar-links a {
     text-decoration: none;
-    color: #1f2328;
+    color: var(--text-primary);
     font-size: 14px;
     font-weight: 500;
 }
 
 .navbar-links a:hover {
-    color: #0969da;
+    color: var(--link-blue);
 }
 
 .auth-section {
@@ -57,14 +71,14 @@ body {
     gap: 12px;
     margin-left: 10px;
     padding-left: 15px;
-    border-left: 1px solid #d0d7de;
+    border-left: 1px solid var(--border-color);
 }
 
 .btn-signup {
-    border: 1px solid #d0d7de;
+    border: 1px solid var(--border-color);
     padding: 5px 12px;
     border-radius: 6px;
-    background-color: #f6f8fa;
+    background-color: var(--bg-main);
 }
 
 /* --- 3. Layout Containers --- */
@@ -74,19 +88,18 @@ body {
     padding: 0 16px;
 }
 
-/* Add this class to your <body> tag ONLY on Login/Signup pages */
 .auth-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 70px); /* Centers form below navbar */
+    min-height: calc(100vh - 120px);
 }
 
 /* --- 4. Form & Card Styling --- */
 .signup-container {
-    background-color: #ffffff;
-    border: 1px solid #d0d7de;
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 32px;
     width: 100%;
@@ -117,58 +130,59 @@ label {
 input, select {
     padding: 8px 12px;
     font-size: 14px;
-    border: 1px solid #d0d7de;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
-    background-color: #f6f8fa;
+    background-color: var(--bg-main);
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus {
     outline: none;
-    border-color: #0969da;
+    border-color: var(--link-blue);
     box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3);
-    background-color: #ffffff;
+    background-color: var(--bg-white);
 }
 
 .helper-text {
     font-size: 12px;
-    color: #636c76;
+    color: var(--text-secondary);
     margin-top: 4px;
 }
 
-/* --- 5. Buttons & Links --- */
-button {
+/* --- 5. Buttons & Global Actions --- */
+button, .btn-primary {
     width: 100%;
-    background-color: #1f2328;
+    background-color: var(--btn-dark);
     color: #ffffff;
-    padding: 12px;
-    font-size: 16px;
+    padding: 10px 16px;
+    font-size: 14px;
     font-weight: 600;
     border: 1px solid rgba(27, 31, 36, 0.15);
     border-radius: 6px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 button:hover {
-    background-color: #2b3137;
+    background-color: var(--btn-dark-hover);
 }
 
-.label-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Success Green Buttons (+ Upload / + New Folder) */
+.btn-new-folder {
+    margin-bottom: 12px;
+    width: auto;
+    background-color: var(--success-green);
+    display: inline-block;
 }
 
-.forgot-link, .login-footer a {
-    font-size: 12px;
-    color: #0969da;
-    text-decoration: none;
+.btn-new-folder:hover {
+    background-color: var(--success-hover);
 }
 
 .login-footer {
     margin-top: 24px;
     padding: 15px;
-    border: 1px solid #d0d7de;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     text-align: center;
     background: white;
@@ -176,93 +190,30 @@ button:hover {
     width: 100%;
 }
 
-/* Profile Specific Styles */
-.profile-card {
-    text-align: center;
-}
-
-.profile-header {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #d0d7de;
-}
-
-
-.profile-email {
-    color: #636c76;
-    margin: 4px 0 0;
-}
-
-/* Action Buttons */
-.profile-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.profile-actions a {
-    display: block;
+.forgot-link, .login-footer a {
+    font-size: 12px;
+    color: var(--link-blue);
     text-decoration: none;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    transition: 0.2s;
 }
 
-/* Yellowish Edit Button */
-.btn-edit {
-    background-color: #fff8c4;
-    color: #735c0f;
-    border: 1px solid rgba(212, 167, 44, 0.4);
-}
-
-.btn-edit:hover {
-    background-color: #fbe54e;
-    border-color: rgba(212, 167, 44, 0.8);
-}
-
-/* Red Delete Button */
-.btn-delete {
-    background-color: #f6f8fa;
-    color: #cf222e;
-    border: 1px solid #d0d7de;
-}
-
-.btn-delete:hover {
-    background-color: #cf222e;
-    color: #ffffff;
-    border-color: #cf222e;
-}
-
-/* --- File Upload Specifics --- */
-.file-input-styled {
-    padding: 20px;
-    border: 2px dashed #d0d7de;
-    background-color: #f6f8fa;
-    text-align: center;
-    cursor: pointer;
-}
-
-/* --- Files List Layout --- */
+/* --- 6. File Explorer Layout --- */
 .files-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 16px;
-    border-bottom: 2px solid #d0d7de;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 8px;
 }
 
 .file-count {
-    color: #636c76;
+    color: var(--text-secondary);
     font-size: 14px;
 }
 
 .files-grid {
-    background: #ffffff;
-    border: 1px solid #d0d7de;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     overflow: hidden;
 }
@@ -272,7 +223,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid #d0d7de;
+    border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s;
 }
 
@@ -281,10 +232,9 @@ button:hover {
 }
 
 .file-row:hover {
-    background-color: #f6f8fa;
+    background-color: var(--bg-main);
 }
 
-/* --- File Info Styling --- */
 .file-info {
     display: flex;
     align-items: center;
@@ -302,170 +252,28 @@ button:hover {
 
 .file-name {
     font-weight: 600;
-    color: #0969da;
+    color: var(--link-blue);
     font-size: 14px;
 }
 
 .file-meta {
     font-size: 12px;
-    color: #636c76;
+    color: var(--text-secondary);
 }
 
-/* --- Download Button --- */
-.btn-download {
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    color: #1f2328;
-    background: #f6f8fa;
-    padding: 4px 12px;
-    border: 1px solid #d0d7de;
-    border-radius: 6px;
-}
-
-.btn-download:hover {
-    background: #ebeff2;
-}
-
-/* --- 6. Modal System (Solid & Fixed) --- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Darker, solid-feeling overlay without blur to prevent bleeding */
-    background: rgba(31, 35, 40, 0.75); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
-
-.modal-card {
-    /* Forced solid white background */
-    background: #ffffff !important; 
-    width: 90%;
-    max-width: 400px;
-    padding: 24px;
-    border-radius: 8px;
-    border: 1px solid #d0d7de;
-    /* Deeper shadow to create physical separation */
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3); 
-    animation: modalFadeIn 0.2s ease-out;
-    position: relative;
-    opacity: 1 !important;
-}
-
-.modal-card h3 {
-    margin: 0 0 16px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #1f2328;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 20px;
-}
-
-.modal-actions button {
-    width: auto;
-    padding: 6px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.btn-cancel {
-    background-color: #f6f8fa;
-    color: #1f2328;
-    border: 1px solid #d0d7de;
-}
-
-.btn-cancel:hover {
-    background-color: #ebeff2;
-}
-
-/* --- 7. Utility & Layout --- */
-.btn-new-folder {
-    margin-bottom: 20px;
-    width: auto;
-    font-size: 14px;
-    padding: 6px 16px;
-    background-color: #2ea44f; /* Green for "Create" actions */
-    color: white;
-    border: 1px solid rgba(27, 31, 36, 0.15);
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btn-new-folder:hover {
-    background-color: #2c974b;
-}
-
-@keyframes modalFadeIn {
-    from { 
-        transform: scale(0.95); 
-        opacity: 0; 
-    }
-    to { 
-        transform: scale(1); 
-        opacity: 1; 
-    }
-}
-
-/* --- 8. Flash Messages --- */
-.flash {
-    max-width: 1012px; /* Matches your navbar and container width */
-    margin: 16px auto 0; /* Centered with a gap below the navbar */
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    border: 1px solid;
-    animation: slideDown 0.3s ease-out;
-}
-
-/* Success: Green theme like the "Create" buttons */
-.flash-success {
-    background-color: #dafbe1;
-    color: #1a7f37;
-    border-color: rgba(26, 127, 55, 0.2);
-}
-
-/* Error: Red theme like the "Delete" buttons */
-.flash-error {
-    background-color: #ffebe9;
-    color: #cf222e;
-    border-color: rgba(207, 34, 46, 0.2);
-}
-
-/* Animation to make it feel smooth when it appears */
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* --- Icon Button Styles --- */
+/* --- 7. Action Icons (Download/Delete) --- */
 .file-actions {
     display: flex;
     gap: 8px;
     align-items: center;
 }
 
+.file-actions form {
+    margin: 0; /* Prevents button jumping */
+}
+
 .btn-icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 32px;
@@ -477,24 +285,173 @@ button:hover {
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
-    text-decoration: none; /* For the <a> tag download */
+    flex-shrink: 0;
 }
 
-/* Download Hover */
 .btn-download:hover {
     color: var(--link-blue);
     background-color: #ffffff;
     border-color: var(--link-blue);
 }
 
-/* Delete Hover */
 .btn-delete:hover {
-    color: #cf222e;
+    color: var(--error-red);
     background-color: #ffebe9;
     border-color: rgba(207, 34, 46, 0.4);
 }
 
-/* Adjusting the icons to look small and centered */
-.btn-icon svg {
-    display: block;
+/* --- 8. Flash Messages --- */
+.flash {
+    max-width: 1012px;
+    margin: 16px auto 0;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid;
+    animation: slideDown 0.3s ease-out;
+}
+
+.flash-success {
+    background-color: #dafbe1;
+    color: #1a7f37;
+    border-color: rgba(26, 127, 55, 0.2);
+}
+
+.flash-error {
+    background-color: #ffebe9;
+    color: var(--error-red);
+    border-color: rgba(207, 34, 46, 0.2);
+}
+
+/* --- 9. Animations & Misc --- */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.file-input-styled {
+    padding: 20px;
+    border: 2px dashed var(--border-color);
+    background-color: var(--bg-main);
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Profile header logic */
+.profile-header {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-edit {
+    background-color: #fff8c4;
+    color: #735c0f;
+    border: 1px solid rgba(212, 167, 44, 0.4);
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* --- 10. Standalone Form Card (for Folders & Uploads) --- */
+
+/* Reusing the auth-page logic to center the card on the screen */
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 150px); /* Centers content below navbar */
+}
+
+/* The primary container for standalone folder/upload forms */
+.form-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-card h3 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+}
+
+/* Modal Actions refactored for standalone buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Ensuring buttons in standalone forms don't take 100% width unless told */
+.form-actions button, 
+.form-actions a {
+    width: auto;
+    min-width: 100px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Back/Cancel button for standalone pages */
+.btn-back {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-back:hover {
+    background-color: #ebeff2;
+}
+
+/* Container for the folder ID/Root text */
+.folder-status {
+    margin-bottom: 20px;
+    padding: 8px;
+    background-color: var(--bg-main);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.folder-status .helper-text {
+    margin: 0;
+    text-align: center;
+}
+
+/* Side-by-side button layout */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Resetting width for standalone page buttons */
+.form-actions button, 
+.form-actions .btn-back {
+    width: auto !important;
+    min-width: 120px;
+    padding: 10px 20px;
 }

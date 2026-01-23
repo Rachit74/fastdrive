@@ -1,8 +1,8 @@
-<div class="modal-overlay" id="modal-container">
-    <div class="modal-card">
+<div class="auth-page">
+    <div class="form-card">
         <h3>Create New Folder</h3>
 
-        <form hx-post="/folder/new" hx-target="body" hx-push-url="true">
+        <form action="/folder/new" method="POST">
             <div class="form-group">
                 <label for="folder_name">Folder Name</label>
                 <input
@@ -15,11 +15,15 @@
                 />
             </div>
 
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" onclick="document.getElementById('modal').innerHTML = ''">
+            <% if (typeof folder_id !== 'undefined') { %>
+                <input type="hidden" name="folder_id" value="<%= folder_id %>">
+            <% } %>
+
+            <div class="form-actions">
+                <a href="/folder/folders" class="btn-primary btn-back">
                     Cancel
-                </button>
-                <button type="submit" class="btn-primary" style="background-color: #2ea44f;">
+                </a>
+                <button type="submit" class="btn-primary" style="background-color: var(--success-green);">
                     Create Folder
                 </button>
             </div>

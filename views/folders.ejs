@@ -6,15 +6,10 @@
         </span>
     </div>
 
-    <button 
-        class="btn-new-folder"
-        hx-get="/folder/new" 
-        hx-target="#modal" 
-        hx-trigger="click">
-        + New Folder
-    </button>
+    <a href="/folder/new">
+        <button class="btn-new-folder">+ New Folder</button>
+    </a>
 
-    <div id="modal"></div>
 
     <div class="files-grid">
         <% if (!folders || folders.length === 0) { %>

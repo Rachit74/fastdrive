@@ -3,7 +3,10 @@ const db = require("../db");
 
 exports.createFolder = async (req, res) => {
     const user_id = req.user.userID;
-    const { folder_name } = req.body;
+    const { folder_name, folder_id } = req.body;
+
+
+    const parent_id = folder_id;
 
     if (!folder_name) {
         return res.status(400).json({
@@ -11,12 +14,10 @@ exports.createFolder = async (req, res) => {
         });
     }
 
-    const folder = await db.folders.createFolder(folder_name, user_id);
+    const folder = await db.folders.createFolder(folder_name, user_id, parent_id);
 
-    return res.status(201).json({
-        message: "Folder Created",
-        folder,
-    });
+    req.flash("success", "Folder Created");
+    return res.redirect(`/folder/folders/${folder.id}`);
 
 }
 

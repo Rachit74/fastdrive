@@ -14,13 +14,7 @@ const fileRouter = Router();
 // ejs render routes (get routes)
 // fileRouter.get("/upload", auth, fileController.uploadFileForm);
 
-fileRouter.get("/upload", auth, (req,res) => {
-    let folder_id = req.query.folder_id;
-        if (!folder_id || folder_id === "null") {
-        folder_id = null;
-    }
-    res.render("partials/upload", { layout: false, folder_id });
-})
+fileRouter.get("/upload", auth, fileController.uploadFileForm);
 
 // action routes
 fileRouter.get("/files", auth, fileController.getFiles);
