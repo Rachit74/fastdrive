@@ -14,18 +14,16 @@ async function uploadFile(file_name, original_name, mime_type, file_size, storag
     return rows[0];
 }
 
-async function getFiles(user_id, folder_id) {
+// This is the function to get all files for the user by user_id
+// gets all files with the passed user_id, of every folder and nested folder
+async function getFiles(user_id) {
     const { rows } = await pool.query(
         `
         SELECT *
         FROM files
-        WHERE user_id = $1
-        AND (
-            $2::uuid IS NULL
-            OR folder_id = $2::uuid
-        );
+        WHERE user_id = $1;
         `,
-        [user_id, folder_id]
+        [user_id]
     )
 
     return rows;

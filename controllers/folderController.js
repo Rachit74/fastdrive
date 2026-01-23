@@ -30,12 +30,18 @@ exports.getFolders = async (req, res) => {
     return res.render("folders", { folders });
 }
 
+// individual folder controller
 exports.getFolderByID = async (req, res) => {
     const user_id = req.user.userID;
     const { folder_id } = req.params;
 
+    const folder = await db.folders.getFolderByID(folder_id);
+
+    // for debug
+    console.log(folder);
+
     const files = await db.files.getFilesByFolderID(folder_id, user_id);
 
-    return res.render("files", { files , folder_id });
+    return res.render("files", { files , folder });
 
 }

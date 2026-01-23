@@ -1,17 +1,17 @@
 <div class="container">
     <div class="files-header">
-        <% if (folder_id) { %>
-            <h2>Folder</h2>
-        <%  } else { %>
-            <h2>My Files</h2>
+        <% if (folder) { %>
+        <h2>Folder: <%= folder.folder_name %></h2>
+        <% } else { %>
+        <h2>My Files</h2>
         <% } %>
+
         <span class="file-count"><%= files.length %> items</span>
-        <%= folder_id %>
     </div>
 
     <button 
         class="btn-new-folder"
-        hx-get="/upload?folder_id=<%= folder_id %>" 
+        hx-get="<%= folder ? `/upload?folder_id=${folder.id}` : '/upload' %>"
         hx-target="#modal" 
         hx-trigger="click">
         + Upload File

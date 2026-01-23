@@ -25,7 +25,20 @@ async function getFolders(user_id) {
     return rows;
 }
 
+// get folder by id
+async function getFolderByID(folder_id) {
+    const { rows } = await pool.query(
+        `
+        SELECT * FROM folders
+        WHERE id = $1;
+        `,
+        [folder_id]
+    );
+    return rows[0];
+}
+
 module.exports = {
     createFolder,
     getFolders,
+    getFolderByID,
 }

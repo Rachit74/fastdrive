@@ -34,23 +34,15 @@ exports.uploadFile = async (req, res) => {
     return res.redirect("/files");
 }
 
+// controller to get all the user files from every folder and sub folder
 exports.getFiles = async (req, res) => {
 
-
     const user_id = req.user.userID;
-    let { folder_id } = req.params;
+    let folder = null;
 
+    const files = await db.files.getFiles(user_id);
 
-    if (folder_id == undefined) {
-        folder_id = null;
-    }
-
-    const files = await db.files.getFiles(user_id, folder_id);
-
-    folder_id = null;
-
-    // console.log(files);
-    return res.render("files", { files, folder_id });
+    return res.render("files", { files, folder });
 }
 
 exports.downloadFile = async (req, res) => {
