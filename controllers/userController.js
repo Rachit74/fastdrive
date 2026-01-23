@@ -43,7 +43,6 @@ exports.updateProfile = async (req, res) => {
         }
 
 
-
         // hash new password
         const new_password_hash = await bcrypt.hash(new_password, 10);
 

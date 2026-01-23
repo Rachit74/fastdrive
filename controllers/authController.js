@@ -61,8 +61,9 @@ exports.userLogin = async (req,res) => {
         const { email, password } = req.body;
 
         if (!email || !password) {
+            // sending response becuase frontend handles require
             return res.status(400).json({
-                message: "Please Provide Email!",
+                message: "Please Provide All the details!",
             });
         }
 
@@ -70,18 +71,16 @@ exports.userLogin = async (req,res) => {
         const user = await db.user.findUserByEmail(email);
 
         if (!user) {
-            return res.status(401).json({
-                message: "Invalid Email!",
-            })
+            req.flash("error", "Could not find user! Try with a valid Email");
+            return res.redirect("/auth/login");
         }
 
         // compare password
         const isMatch = await bcrypt.compare(password, user.password_hash);
 
         if (!isMatch) {
-            return res.status(401).json({
-                message: "Invalid Password!",
-            })
+            req.flash("error", "Invalid Password!");
+            return res.redirect("/auth/login");
         }
 
         const token = jwt.sign(
@@ -102,12 +101,9 @@ exports.userLogin = async (req,res) => {
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
 
+        // for debug
         // console.log(req.cookies);
 
-        // return res.status(200).json({
-        //     message: "Login Successful!",
-        //     token,
-        // })
 
         req.flash("success", "Login Successful!");
         return res.redirect("/user/profile");
