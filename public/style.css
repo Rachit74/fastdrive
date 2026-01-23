@@ -21,24 +21,26 @@ body {
     line-height: 1.5;
 }
 
-/* --- 2. Navbar Styling --- */
+/* --- 2. Navbar & Layout --- */
 .navbar {
     background-color: var(--bg-white);
     border-bottom: 1px solid var(--border-color);
     padding: 12px 0;
-    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.navbar-container {
+.navbar-container, .container {
     max-width: 1012px;
     margin: 0 auto;
+    padding: 0 16px;
+}
+
+.navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 16px;
 }
 
 .navbar-brand {
@@ -48,71 +50,45 @@ body {
     text-decoration: none;
 }
 
-.navbar-links {
+.navbar-links, .auth-section {
     display: flex;
     align-items: center;
-    gap: 20px;
-}
-
-.navbar-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.navbar-links a:hover {
-    color: var(--link-blue);
+    gap: 15px;
 }
 
 .auth-section {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin-left: 10px;
     padding-left: 15px;
     border-left: 1px solid var(--border-color);
 }
 
-.btn-signup {
-    border: 1px solid var(--border-color);
-    padding: 5px 12px;
-    border-radius: 6px;
-    background-color: var(--bg-main);
-}
-
-/* --- 3. Layout Containers --- */
-.container {
-    max-width: 1012px;
-    margin: 32px auto;
-    padding: 0 16px;
-}
+.container { margin-top: 32px; }
 
 .auth-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 150px);
 }
 
-/* --- 4. Form & Card Styling --- */
-.signup-container {
+/* --- 3. Cards & Forms --- */
+.signup-container, .form-card {
     background-color: var(--bg-white);
     border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 32px;
     width: 100%;
     max-width: 440px;
-    margin-top: 20px;
 }
 
-h1 {
+.form-card h3 {
+    margin: 0 0 24px 0;
     font-size: 24px;
-    font-weight: 300;
-    margin-top: 0;
-    margin-bottom: 20px;
+    font-weight: 400;
     text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
 }
 
 .form-group {
@@ -121,11 +97,7 @@ h1 {
     flex-direction: column;
 }
 
-label {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 6px;
-}
+label { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
 
 input, select {
     padding: 8px 12px;
@@ -133,7 +105,7 @@ input, select {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     background-color: var(--bg-main);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: 0.2s;
 }
 
 input:focus {
@@ -143,15 +115,10 @@ input:focus {
     background-color: var(--bg-white);
 }
 
-.helper-text {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-}
+.helper-text { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
 
-/* --- 5. Buttons & Global Actions --- */
+/* --- 4. Buttons --- */
 button, .btn-primary {
-    width: 100%;
     background-color: var(--btn-dark);
     color: #ffffff;
     padding: 10px 16px;
@@ -160,43 +127,28 @@ button, .btn-primary {
     border: 1px solid rgba(27, 31, 36, 0.15);
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.2s;
-}
-
-button:hover {
-    background-color: var(--btn-dark-hover);
-}
-
-/* Success Green Buttons (+ Upload / + New Folder) */
-.btn-new-folder {
-    margin-bottom: 12px;
-    width: auto;
-    background-color: var(--success-green);
-    display: inline-block;
-}
-
-.btn-new-folder:hover {
-    background-color: var(--success-hover);
-}
-
-.login-footer {
-    margin-top: 24px;
-    padding: 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    text-align: center;
-    background: white;
-    max-width: 440px;
-    width: 100%;
-}
-
-.forgot-link, .login-footer a {
-    font-size: 12px;
-    color: var(--link-blue);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* --- 6. File Explorer Layout --- */
+button:hover { background-color: var(--btn-dark-hover); }
+
+.btn-new-folder { background-color: var(--success-green); margin-bottom: 12px; border: none; }
+.btn-new-folder:hover { background-color: var(--success-hover); }
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-back { background-color: var(--bg-main); color: var(--text-primary); border: 1px solid var(--border-color); }
+.btn-back:hover { background-color: #ebeff2; }
+
+/* --- 5. File Explorer --- */
 .files-header {
     display: flex;
     justify-content: space-between;
@@ -206,17 +158,7 @@ button:hover {
     padding-bottom: 8px;
 }
 
-.file-count {
-    color: var(--text-secondary);
-    font-size: 14px;
-}
-
-.files-grid {
-    background: var(--bg-white);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden;
-}
+.files-grid { background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 6px; overflow: hidden; }
 
 .file-row {
     display: flex;
@@ -224,234 +166,39 @@ button:hover {
     align-items: center;
     padding: 12px 16px;
     border-bottom: 1px solid var(--border-color);
-    transition: background-color 0.2s;
 }
 
-.file-row:last-child {
-    border-bottom: none;
-}
+.file-row:last-child { border-bottom: none; }
+.file-row:hover { background-color: var(--bg-main); }
 
-.file-row:hover {
-    background-color: var(--bg-main);
-}
-
-.file-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.file-icon {
-    font-size: 24px;
-}
-
-.file-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.file-name {
-    font-weight: 600;
-    color: var(--link-blue);
-    font-size: 14px;
-}
-
-.file-meta {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-/* --- 7. Action Icons (Download/Delete) --- */
-.file-actions {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.file-actions form {
-    margin: 0; /* Prevents button jumping */
-}
+.file-info { display: flex; align-items: center; gap: 12px; }
+.file-name { font-weight: 600; color: var(--link-blue); font-size: 14px; }
 
 .btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 32px;
     height: 32px;
     padding: 0;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
     background-color: var(--bg-main);
     color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
 }
 
-.btn-download:hover {
-    color: var(--link-blue);
-    background-color: #ffffff;
-    border-color: var(--link-blue);
-}
+.btn-download:hover { color: var(--link-blue); background-color: #ffffff; border-color: var(--link-blue); }
+.btn-delete:hover { color: var(--error-red); background-color: #ffebe9; border-color: rgba(207, 34, 46, 0.4); }
 
-.btn-delete:hover {
-    color: var(--error-red);
-    background-color: #ffebe9;
-    border-color: rgba(207, 34, 46, 0.4);
-}
-
-/* --- 8. Flash Messages --- */
+/* --- 6. Extras --- */
 .flash {
     max-width: 1012px;
     margin: 16px auto 0;
     padding: 12px 16px;
     border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
     border: 1px solid;
     animation: slideDown 0.3s ease-out;
 }
+.flash-success { background-color: #dafbe1; color: #1a7f37; border-color: rgba(26,127,55,0.2); }
+.flash-error { background-color: #ffebe9; color: var(--error-red); border-color: rgba(207,34,46,0.2); }
 
-.flash-success {
-    background-color: #dafbe1;
-    color: #1a7f37;
-    border-color: rgba(26, 127, 55, 0.2);
-}
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-.flash-error {
-    background-color: #ffebe9;
-    color: var(--error-red);
-    border-color: rgba(207, 34, 46, 0.2);
-}
+.file-input-styled { padding: 20px; border: 2px dashed var(--border-color); background-color: var(--bg-main); text-align: center; cursor: pointer; }
 
-/* --- 9. Animations & Misc --- */
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.file-input-styled {
-    padding: 20px;
-    border: 2px dashed var(--border-color);
-    background-color: var(--bg-main);
-    text-align: center;
-    cursor: pointer;
-}
-
-/* Profile header logic */
-.profile-header {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border-color);
-    text-align: center;
-}
-
-.profile-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.btn-edit {
-    background-color: #fff8c4;
-    color: #735c0f;
-    border: 1px solid rgba(212, 167, 44, 0.4);
-    text-align: center;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 6px;
-    font-weight: 600;
-}
-
-/* --- 10. Standalone Form Card (for Folders & Uploads) --- */
-
-/* Reusing the auth-page logic to center the card on the screen */
-.auth-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 150px); /* Centers content below navbar */
-}
-
-/* The primary container for standalone folder/upload forms */
-.form-card {
-    background-color: var(--bg-white);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 32px;
-    width: 100%;
-    max-width: 440px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.form-card h3 {
-    margin-top: 0;
-    margin-bottom: 24px;
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 16px;
-}
-
-/* Modal Actions refactored for standalone buttons */
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-/* Ensuring buttons in standalone forms don't take 100% width unless told */
-.form-actions button, 
-.form-actions a {
-    width: auto;
-    min-width: 100px;
-    text-decoration: none;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Back/Cancel button for standalone pages */
-.btn-back {
-    background-color: var(--bg-main);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-}
-
-.btn-back:hover {
-    background-color: #ebeff2;
-}
-
-/* Container for the folder ID/Root text */
-.folder-status {
-    margin-bottom: 20px;
-    padding: 8px;
-    background-color: var(--bg-main);
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-}
-
-.folder-status .helper-text {
-    margin: 0;
-    text-align: center;
-}
-
-/* Side-by-side button layout */
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 24px;
-}
-
-/* Resetting width for standalone page buttons */
-.form-actions button, 
-.form-actions .btn-back {
-    width: auto !important;
-    min-width: 120px;
-    padding: 10px 20px;
-}
+.folder-status { margin-bottom: 20px; padding: 8px; background-color: var(--bg-main); border-radius: 4px; border: 1px solid var(--border-color); text-align: center; }

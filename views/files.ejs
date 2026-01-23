@@ -1,42 +1,19 @@
 <div class="container">
     <div class="files-header">
-        <% if (folder) { %>
-        <h2>Folder: <%= folder.folder_name %></h2>
-        <% } else { %>
-        <h2>My Files</h2>
-        <% } %>
-
+        <h2><%= folder ? 'Folder: ' + folder.folder_name : 'My Files' %></h2>
         <span class="file-count"><%= files.length %> items</span>
     </div>
 
-
-
-    <a href="<%= folder ? `/upload?folder_id=${folder.id}` : '/upload' %>">
-        <button class="btn-new-folder" type="submit">
-            + Upload File
-        </button>
-    </a>
-
-    <% if (folder) { %>
-
-    <a href="/folder/new?folder_id=<%= folder.id %>">
-        <button class="btn-new-folder" type="submit">
-            + New Folder
-        </button>
-    </a>
-
-    <% } %>
-
-
-    <!-- <div id="modal"></div> -->
+    <div class="action-bar">
+        <a href="<%= folder ? `/upload?folder_id=${folder.id}` : '/upload' %>" class="btn-primary btn-new-folder">+ Upload File</a>
+        <% if (folder) { %>
+            <a href="/folder/new?folder_id=<%= folder.id %>" class="btn-primary btn-new-folder">+ New Folder</a>
+        <% } %>
+    </div>
     
     <div class="files-grid">
         <% if (!files || files.length === 0) { %>
-            <div class="file-row">
-                <p class="file-meta" style="padding: 20px; text-align: center; width: 100%;">
-                    No files found. Upload one to get started!
-                </p>
-            </div>
+            <div class="file-row"><p class="helper-text" style="width:100%; text-align:center; padding:20px;">No files found.</p></div>
         <% } else { %>
             <% files.forEach(file => { %>
                 <div class="file-row">
@@ -44,27 +21,18 @@
                         <div class="file-icon">📄</div>
                         <div class="file-details">
                             <span class="file-name"><%= file.original_name %></span>
-                            <span class="file-meta">
-                                <%= file.mime_type %> • <%= (file.file_size / 1024).toFixed(2) %> KB
-                            </span>
+                            <span class="file-meta"><%= file.mime_type %> • <%= (file.file_size / 1024).toFixed(2) %> KB</span>
                         </div>
                     </div>
                     <div class="file-actions">
-                        <a href="/download/<%= file.id %>" class="btn-icon btn-download" title="Download">
-        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-            <path d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Z"></path>
-            <path d="M2 12.75a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"></path>
-        </svg>
-    </a>
-
+                        <a href="/download/<%= file.id %>" class="btn-primary btn-icon btn-download" title="Download">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M7.47 10.78a.75.75 0 0 0 1.06 0l3.75-3.75a.75.75 0 0 0-1.06-1.06L8.75 8.44V1.75a.75.75 0 0 0-1.5 0v6.69L4.78 5.97a.75.75 0 0 0-1.06 1.06l3.75 3.75Z"></path><path d="M2 12.75a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"></path></svg>
+                        </a>
                         <form method="POST" action="/delete/<%= file.id %>">
-
-                            <button class="btn-icon btn-delete">
+                            <button type="submit" class="btn-icon btn-delete" title="Delete">
                                 <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M11 1.75V3h2.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75ZM4.496 6.675a.75.75 0 1 0-1.492.15l.66 6.623C3.844 14.519 4.73 16 5.938 16h4.124c1.208 0 2.094-1.481 2.274-2.552l.66-6.623a.75.75 0 0 0-1.492-.15l-.66 6.623a.75.75 0 0 1-1.137.552H5.938a.75.75 0 0 1-1.137-.552l-.66-6.623Z"></path></svg>
                             </button>
-
                         </form>
-                        
                     </div>
                 </div>
             <% }) %>
