@@ -9,7 +9,11 @@ folderRouter.post("/new", auth, folderController.createFolder);
 
 
 folderRouter.get("/new", auth, (req,res) => {
-    res.render("partials/new-folder", { layout: false });
+    let folder_id = req.query.folder_id;
+    if (!folder_id || folder_id === null) {
+        folder_id = null;
+    }
+    res.render("new-folder", { folder_id });
 })
 
 folderRouter.get('/folders', auth, folderController.getFolders);

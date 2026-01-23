@@ -1,13 +1,13 @@
 const pool = require("./pool");
 
-async function createFolder(folder_name, user_id) {
+async function createFolder(folder_name, user_id, parent_id) {
     const { rows } = await pool.query(
         `
-        INSERT INTO folders (folder_name, user_id)
-        VALUES ($1, $2)
+        INSERT INTO folders (folder_name, user_id, parent_id)
+        VALUES ($1, $2, $3)
         RETURNING *
         `,
-        [folder_name, user_id]
+        [folder_name, user_id, parent_id]
     );
 
     return rows[0];
