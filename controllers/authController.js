@@ -20,15 +20,16 @@ exports.userSignup = async (req, res) => {
 
         // Basic Validation
         if (!username || !email || !password || !confirm_password) {
-            return res.status(400).json({
-                message: "All fields are required!",
-            })
+            req.flash("error", "All fields are required");
+            return res.redirect("/auth/signup");
+            // return res.status(400).json({
+            //     message: "All fields are required!",
+            // })
         }
 
         if (password != confirm_password) {
-            return res.status(400).json({
-                message: "Passwords not not match!",
-            })
+            req.flash("error", "Passwords must match!");
+            return res.redirect("/auth/signup");
         }
 
         // hash passworld
