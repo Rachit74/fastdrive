@@ -37,10 +37,6 @@ exports.userSignup = async (req, res) => {
 
         const user = await db.user.createUser(username, email, password_hash);
 
-        // return res.status(200).json({
-        //     message: "User Registered!",
-        // });
-
         req.flash("success", "User Registered! Please Login.");
         return res.redirect("/auth/login");
         
@@ -101,9 +97,6 @@ exports.userLogin = async (req,res) => {
             secure: process.env.NODE_ENV === "production", 
             maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
-
-        // for debug
-        // console.log(req.cookies);
 
 
         req.flash("success", "Login Successful!");

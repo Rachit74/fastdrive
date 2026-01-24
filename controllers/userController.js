@@ -36,10 +36,6 @@ exports.updateProfile = async (req, res) => {
             // using status code 200 becuase htmx does not swap the html for error codes like 401, 404 and 500
             return res.status(200).send('<p style="color: red; margin-bottom: 10px;">Invalid Password!</p>');
 
-            // return res.status(401).send("Invalid Password");
-                // return res.status(401).json({
-                //     message: "Invalid Password!",
-                // })
         }
 
 

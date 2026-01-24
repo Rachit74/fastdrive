@@ -33,11 +33,6 @@ exports.uploadFile = async (req, res) => {
 
     await db.files.uploadFile(filename, originalname, mimetype, size, path, folder_id, req.user.userID);
 
-    // return res.status(200).json({
-    //     message: "File uploaded successfully",
-    //     filename: req.file.filename
-    // });
-
     req.flash("success", "File uploaded successfully");
     return res.redirect("/files");
 }
