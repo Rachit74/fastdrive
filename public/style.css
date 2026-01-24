@@ -202,3 +202,18 @@ button:hover { background-color: var(--btn-dark-hover); }
 .file-input-styled { padding: 20px; border: 2px dashed var(--border-color); background-color: var(--bg-main); text-align: center; cursor: pointer; }
 
 .folder-status { margin-bottom: 20px; padding: 8px; background-color: var(--bg-main); border-radius: 4px; border: 1px solid var(--border-color); text-align: center; }
+
+/* Add this to your style.css if not already present */
+.form-card strong {
+    color: var(--error-red); /* Uses the #cf222e red we defined */
+}
+
+/* Specific button override for the Delete confirmation */
+.btn-danger-confirm {
+    background-color: var(--error-red);
+    border-color: rgba(207, 34, 46, 0.4);
+}
+
+.btn-danger-confirm:hover {
+    background-color: #a40e18; /* Darker red on hover */
+}

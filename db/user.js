@@ -43,9 +43,20 @@ async function updateUser(username, email, new_password_hash, user_id) {
     return rows[0];
 }
 
+// delete user
+async function deleteUser(user_id) {
+    await pool.query(
+        `
+        DELETE FROM users WHERE id = $1;
+        `,
+        [user_id]
+    );
+}
+
 module.exports = {
     createUser,
     findUserByEmail,
     getUserByID,
     updateUser,
+    deleteUser,
 };

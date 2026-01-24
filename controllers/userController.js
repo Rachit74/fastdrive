@@ -64,3 +64,50 @@ exports.userProfile = async (req, res) => {
     const user = await db.user.getUserByID(req.user.userID);
     return res.render("profile", { user })
 }
+
+exports.deleteUserConfirm = function deleteUserConfirm(req, res) {
+    res.render('delete-user');
+}
+
+exports.deleteUserAccount = async function deleteUserAccount(req, res) {
+    // get current user id
+    const user_id = req.user.userID;
+
+    // get password and confirm_password from forms
+    const { password, confirm_password } = req.body;
+
+    // check if password and confirm_password are equal
+    if (password != confirm_password) {
+        req.flash("error", "Passwords must match");
+        return res.redirect("/user/delete");
+    }
+
+    // get user data
+    const user = await db.user.getUserByID(user_id);
+
+    // handle not found
+    if (!user) {
+        res.status(404).json({
+            message: "User not found!",
+            code: 404,
+        });
+    }
+
+    // compare hashes after validation
+
+    const isMatch = await bcrypt.compare(user.password_hash, password);
+
+
+    // wrong password handle
+    if (!isMatch) {
+        req.flash("error", "Invalid Password, Please try again!");
+        return res.redirect("/user/delete");
+    }
+
+    // delete user if everything above validates
+    // await db.user.deleteUser(user_id);
+
+    req.flash("success", "User Account Was Deleted!");
+    return res.redirect("/auth/signup");
+
+}
