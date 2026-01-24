@@ -35,16 +35,22 @@ exports.getFolders = async (req, res) => {
         parent_id = null;
     }
 
+    // need to get valid folder record from parent_id to pass into upload file form
+    let folder = await db.folders.getFolderByID(parent_id);
 
-    // null folder for folder creation in root
-    let folder = null;
+    if (!folder) {
+        folder = null;
+    }
+
 
     const folders = await db.folders.getFolders(user_id, parent_id);
 
+    // get folder files
+    const files = await db.files.getFilesByFolderID(parent_id, user_id);
 
-    // console.log(folders);
+    console.log(files);
 
-    return res.render("folders", { folders, folder });
+    return res.render("folders", { folders, folder, files });
 }
 
 // individual folder controller
@@ -55,7 +61,7 @@ exports.getFolderByID = async (req, res) => {
     const folder = await db.folders.getFolderByID(folder_id);
 
     // for debug
-    console.log(folder);
+    // console.log(folder);
 
     const files = await db.files.getFilesByFolderID(folder_id, user_id);
 

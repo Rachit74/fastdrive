@@ -12,7 +12,6 @@ const fileRouter = Router();
 // 
 
 // ejs render routes (get routes)
-// fileRouter.get("/upload", auth, fileController.uploadFileForm);
 
 fileRouter.get("/upload", auth, fileController.uploadFileForm);
 

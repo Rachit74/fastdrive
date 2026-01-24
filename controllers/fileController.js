@@ -11,7 +11,7 @@ exports.uploadFileForm = async (req, res) => {
     if (folder_id) {
         folder = await db.folders.getFolderByID(folder_id);
     }
-
+    
     res.render("upload-file", {
         folder,
         folder_id
