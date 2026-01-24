@@ -9,6 +9,7 @@ const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const fileRouter = require("./routes/fileRouter");
 const folderRouter = require("./routes/folderRouter");
+const indexRouter = require("./routes/indexRouter");
 const session = require("express-session");
 
 const assetsPath = path.join(__dirname, "public");
@@ -54,11 +55,7 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/', fileRouter);
 app.use("/folder", folderRouter);
-
-app.get('/', (req, res) => {
-    res.render("index");
-})
-
+app.use('/', indexRouter);
 
 const PORT = 8000;
 

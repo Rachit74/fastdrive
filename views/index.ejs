@@ -1,4 +1,26 @@
-<h1>
-    welcome to fastdrive
+<div class="auth-page">
+    <div class="form-card" style="text-align: center; max-width: 600px;">
+        <h1 style="font-size: 32px; margin-bottom: 10px;">Welcome to FastDrive</h1>
+        <p class="helper-text" style="font-size: 16px; margin-bottom: 30px;">
+            A minimal, fast, and secure way to manage your personal files and folders.
+        </p>
 
-</h1>
+        <div class="form-actions" style="justify-content: center; display: flex; gap: 15px;">
+            <% if (user) { %>
+                <a href="/files" class="btn-primary" style="background-color: var(--success-green); padding: 12px 24px;">
+                    Go to My Files
+                </a>
+                <a href="/upload" class="btn-primary" style="padding: 12px 24px;">
+                    Upload File
+                </a>
+            <% } else { %>
+                <a href="/auth/signup" class="btn-primary" style="background-color: var(--success-green); padding: 12px 24px;">
+                    Get Started for Free
+                </a>
+                <a href="/auth/login" class="btn-primary btn-back" style="padding: 12px 24px;">
+                    Sign In
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>
